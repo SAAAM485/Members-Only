@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="/styles/style.css" />
+        <title><%= title %></title>
+    </head>
+    <body>
+        <header>
+            <a href="/">Members Only</a>
+        </header>
+        <nav>
+            <ul>
+                <li><a href="/sign-in">Sign In</a></li>
+                <li><a href="/sign-up">Sign Up</a></li>
+            </ul>
+        </nav>
+        <div class="formMainContainer">
+            <% if(title === "Sign In") { %>
+            <form action="/sign-in" method="POST">
+                <label for="username">Username</label>
+                <input type="text" name="username" id="username" required />
+                <label for="password">Password</label>
+                <input type="text" name="password" id="password" required />
+                <button type="submit">Sing In</button>
+            </form>
+
+            <% } else { %>
+            <form action="/sign-up" method="post">
+                <label for="firstName">First Name</label>
+                <input type="text" name="firstName" id="firstName" required />
+                <label for="lastName">Last Name</label>
+                <input type="text" name="lastName" id="lastName" required />
+                <label for="username">Username</label>
+                <input type="text" name="username" id="username" required />
+                <label for="password">Password</label>
+                <input type="text" name="password" id="password" required />
+                <label for="confirmPassword">Confirm Password</label>
+                <input
+                    type="text"
+                    name="confirmPassword"
+                    id="confirmPassword"
+                    required
+                />
+                <button type="submit">Sign Up</button>
+            </form>
+            <% } %>
+        </div>
+        <footer>- Members Only... -</footer>
+    </body>
+</html>

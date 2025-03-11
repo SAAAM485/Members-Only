@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="/styles/style.css" />
+        <title><%= title %></title>
+    </head>
+    <body>
+        <header>
+            <a href="/">Members Only</a>
+        </header>
+        <nav>
+            <ul>
+                <% if (isAuthenticated) { %>
+                <li><a href="/log-out">Log Out</a></li>
+                <% } else { %>
+                <li><a href="/sign-in">Sign In</a></li>
+                <li><a href="/sign-up">Sign Up</a></li>
+                <% } %>
+            </ul>
+        </nav>
+        <div class="mainContainer">
+            <% if (isAuthenticated) { %>
+            <div class="postContainer">
+                <form action="/" method="post">
+                    <label for="title">Title</label>
+                    <input type="text" name="title" id="title" required />
+                    <label for="content">Content</label>
+                    <textarea name="content" id="content"></textarea>
+                    <button type="submit">Post</button>
+                </form>
+            </div>
+            <% board.forEach(post => { %>
+            <div class="postContainer">
+                <div class="title"><%= post.title %></div>
+                <div class="user"><%= post.username %></div>
+                <div class="content"><%= post.content %></div>
+            </div>
+            <% }); %> <% } else { %> <% board.forEach(post => { %>
+            <div class="postContainer">
+                <div class="title"><%= post.title %></div>
+                <div class="user">Sign in to unveil</div>
+                <div class="content"><%= post.content %></div>
+            </div>
+            <% }); %> <% } %>
+        </div>
+        <footer>- Members Only... -</footer>
+    </body>
+</html>

@@ -12,7 +12,7 @@ async function memberBoardGet(username) {
         ORDER BY messages.timestamp DESC`,
         [username]
     );
-    return rows;
+    return rows.rows;
 }
 
 async function boardGet() {
@@ -24,15 +24,21 @@ async function boardGet() {
         ON messages.memberId = members.id 
         ORDER BY messages.timestamp DESC`
     );
-    return rows;
+    return rows.rows;
 }
 
-async function signUpPost(firstName, lastName, username, password, admin) {
+async function signUpPost(user) {
     await pool.query(
         `
         INSERT INTO members (firstName, lastName, username, password, admin) 
         VALUES ($1, $2, $3, $4, $5)`,
-        [firstName, lastName, username, password, admin]
+        [
+            user.firstName,
+            user.lastName,
+            user.username,
+            user.password,
+            user.admin,
+        ]
     );
 }
 
@@ -51,21 +57,24 @@ async function signInPost(username, password) {
 
         const isMatch = await bcrypt.compare(password, user.password);
         if (!isMatch) {
-            return { result: false, message: "Wrong password." };
+            return { result: false, message: "Invalid username or password" };
         }
 
         return { result: true, message: "Login successful." };
     } catch (err) {
         console.error("Error during sign-in process:", err);
-        return { result: false, message: "An error occurred during sign-in." };
+        return {
+            result: false,
+            message: "Unable to process your request at this time.",
+        };
     }
 }
 
-async function messagePost(title, content, memberId) {
+async function messagePost(message) {
     await pool.query(
         `
         INSERT INTO messages (title, content, memberId) 
         VALUES ($1, $2, $3)`,
-        [title, content, memberId]
+        [message.title, message.content, message.memberId]
     );
 }

@@ -28,6 +28,14 @@ const validateUser = [
         .trim()
         .isLength({ min: 1, max: 16 })
         .withMessage(`Password ${lengthErr}`),
+    body("confirmPassword")
+        .trim()
+        .custom((value, { req }) => {
+            if (value !== req.body.password) {
+                throw new Error("Passwords do not match");
+            }
+            return true;
+        }),
     body("title")
         .trim()
         .isLength({ min: 1, max: 30 })
@@ -39,4 +47,61 @@ const validateUser = [
         .withMessage(contentErr),
 ];
 
-async function membersBoardGet(req, res) {}
+async function membersBoardGet(req, res) {
+    const board = await db.boardGet();
+    res.render("board", {
+        board: board,
+        title: "Members' Board",
+        isAuthenticated: req.isAuthenticated(),
+    });
+}
+
+async function messagePost(req, res) {
+    if (!req.body.title || !req.body.content) {
+        return res
+            .status(400)
+            .json({ message: "Title and content are required." });
+    }
+
+    const message = {
+        title: req.body.title,
+        content: req.body.content,
+        memberId: req.user.id,
+    };
+    await db.messagePost(message);
+    res.redirect("board");
+}
+
+async function signUpGet(req, res) {
+    res.render("form", { title: "Sign Up" });
+}
+
+async function signUpPost(req, res) {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        return res.status(400).json({ errors: errors.array() });
+    }
+
+    const hashedPw = await bcrypt.hash(req.body.password, 10);
+    const user = {
+        firstName: req.body.firstName,
+        lastName: req.body.lastName,
+        username: req.body.username,
+        password: hashedPw,
+        admin: req.body.admin,
+    };
+    await db.signUpPost(user);
+    res.redirect("board");
+}
+
+async function signInGet(req, res) {
+    res.render("form", { title: "Sign In" });
+}
+
+module.exports = {
+    membersBoardGet,
+    messagePost,
+    signUpGet,
+    signUpPost,
+    signInGet,
+};
