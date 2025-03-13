@@ -28,7 +28,7 @@ async function main() {
         database: process.env.DB_DATABASE,
         ssl: {
             rejectUnauthorized: true,
-            ca: process.env.DB_SSL_CA,
+            ca: process.env.DB_SSL_CA.replace(/\\n/g, "\n"),
         },
     });
     await client.connect();

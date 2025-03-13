@@ -2,11 +2,12 @@ const express = require("express");
 const router = express.Router();
 const passport = require("./authenticate");
 const membersControllers = require("../controllers/membersControllers");
+const { validateUser, validatePost } = require("../controllers/validation");
 
 router.get("/", membersControllers.membersBoardGet);
-router.post("/", membersControllers.messagePost);
+router.post("/", validatePost, membersControllers.messagePost);
 router.get("/sign-up", membersControllers.signUpGet);
-router.post("/sign-up", membersControllers.signUpPost);
+router.post("/sign-up", validateUser, membersControllers.signUpPost);
 router.get("/sign-in", membersControllers.signInGet);
 router.post(
     "/sign-in",

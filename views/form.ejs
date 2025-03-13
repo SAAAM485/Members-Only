@@ -17,7 +17,15 @@
             </ul>
         </nav>
         <div class="formMainContainer">
-            <% if(title === "Sign In") { %>
+            <% if (errorMessages && errorMessages.length > 0) { %>
+            <div class="alert alert-danger">
+                <ul>
+                    <% errorMessages.forEach(msg => { %>
+                    <li><%= msg %></li>
+                    <% }); %>
+                </ul>
+            </div>
+            <% } %> <% if(title === "Sign In") { %>
             <form action="/sign-in" method="POST">
                 <label for="username">Username</label>
                 <input type="text" name="username" id="username" required />
@@ -43,6 +51,11 @@
                     id="confirmPassword"
                     required
                 />
+                <label for="admin"
+                    >Admin Password (If you have the admin password, please fill
+                    in to gain excess.)</label
+                >
+                <input type="text" name="admin" id="admin" />
                 <button type="submit">Sign Up</button>
             </form>
             <% } %>

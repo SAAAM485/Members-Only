@@ -42,31 +42,20 @@ async function signUpPost(user) {
     );
 }
 
-async function signInPost(username, password) {
+async function signInPost(username) {
     try {
         const result = await pool.query(
-            "SELECT * FROM members WHERE username = $1",
+            "SELECT * FROM members WHERE LOWER(username) = LOWER($1)",
             [username]
         );
 
         if (result.rows.length === 0) {
             return { result: false, message: "User not found." };
         }
-
-        const user = result.rows[0];
-
-        const isMatch = await bcrypt.compare(password, user.password);
-        if (!isMatch) {
-            return { result: false, message: "Invalid username or password" };
-        }
-
-        return { result: true, message: "Login successful." };
+        return { result: true, user: result.rows[0] };
     } catch (err) {
         console.error("Error during sign-in process:", err);
-        return {
-            result: false,
-            message: "Unable to process your request at this time.",
-        };
+        throw err;
     }
 }
 
@@ -78,3 +67,10 @@ async function messagePost(message) {
         [message.title, message.content, message.memberId]
     );
 }
+
+module.exports = {
+    boardGet,
+    signUpPost,
+    signInPost,
+    messagePost,
+};
