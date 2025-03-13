@@ -16,18 +16,18 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #f4f4f4;
+    background-color: #d6e3f7;
     display: flex;
     flex-direction: column;
 }
 
 a {
     text-decoration: none;
-    color: #333;
+    color: #2a3c5a;
 }
 
 header {
-    background-color: #333;
+    background-color: #2a3c5a;
     padding: 2.5rem 0;
     text-align: center;
     position: sticky;
@@ -35,7 +35,7 @@ header {
 }
 
 header a {
-    color: #fff;
+    color: #e48147;
     font-size: 2rem;
     letter-spacing: 0.2rem;
     font-family: "BLUEOCEAN", Arial, sans-serif;
@@ -43,14 +43,15 @@ header a {
 }
 
 nav {
-    background-color: #333;
-    border-top: #fff 0.02rem solid;
+    background-color: #2a3c5a;
+    border-top: #e48147 0.02rem solid;
 }
 
 nav ul {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    grid-auto-rows: 5rem;
+    display: flex;
+    justify-content: space-evenly;
+    height: 5rem;
+    width: 100%;
     list-style: none;
     text-align: center;
     padding: 0;
@@ -58,21 +59,22 @@ nav ul {
 }
 
 nav ul li {
+    flex-grow: 1;
     display: inline;
     margin: 0;
     align-content: center;
 }
 
 nav ul li:hover {
-    color: #fff;
-    background-color: #333;
+    color: #e65e10;
+    background-color: #2a3c5a;
 }
 
 nav ul li a {
     display: block;
     width: 100%;
     height: 100%;
-    color: #fff;
+    color: #e48147;
     font-size: 1.2rem;
     font-weight: 400;
     letter-spacing: 0.1rem;
@@ -80,139 +82,75 @@ nav ul li a {
 }
 
 nav ul li a:hover {
-    background-color: #7a7a7a;
+    background-color: #1a4692;
 }
 
-.mainContainer,
-.albumMainContainer,
-.formMainContainer {
+.mainContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    align-self: center;
+    width: 80%;
     flex-grow: 1;
     padding: 2rem;
 }
 
-.mainContainer {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    grid-auto-rows: 55vh;
-    gap: 2rem;
-}
-
-.albumContainer {
-    border: 1px solid #ddd;
-    padding: 0;
-    margin: 0;
+.postContainer {
+    width: 100%;
+    height: 15rem;
+    margin-bottom: 2rem;
+    padding: 2rem 4rem;
+    border: #e48147 0.1rem solid;
+    background-color: #e6eefd;
     display: flex;
     flex-direction: column;
+    justify-content: flex-start;
 }
 
-.albumContainer:hover {
-    background-color: #f9f9f9;
+.postContainer form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-self: center;
 }
 
-.coverContainer {
-    padding: 2rem 0;
+.postContainer form label {
+    color: #e48147;
+    font-size: 1.2rem;
+    font-weight: 520;
+    margin-bottom: 0.3rem;
 }
 
-.coverContainer img {
-    width: 80%;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    padding: 0;
+.postContainer form textarea,
+.postContainer form input {
+    background-color: #ffffff9c;
+    margin-bottom: 1rem;
 }
 
-.descriptions div {
-    width: 80%;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    padding-top: 0;
-    padding-bottom: 0.6rem;
+.postContainer form button {
+    background-color: #ffffff9c;
+    color: #e48147;
+}
+
+.title,
+.user,
+.time,
+.content {
+    color: #e48147;
+    font-size: 1.2rem;
+    font-weight: 520;
+    margin-bottom: 0.8rem;
+}
+
+.veiled {
+    color: #e65e10;
 }
 
 footer {
     padding: 2rem 0;
     text-align: center;
-}
-
-.albumMainContainer {
-    width: 60%;
-    margin: 2rem 0;
-    align-self: center;
-    border: #333 solid 0.02rem;
-}
-
-.albumMainContainer .coverContainer img {
-    width: 50%;
-}
-
-.albumMainContainer .descriptions div {
-    width: 50%;
-}
-
-.name,
-.albumName {
-    font-size: 1.5rem;
-    font-weight: 450;
-    letter-spacing: 0.1rem;
-}
-
-.artist,
-.albumArtist {
-    font-size: 1.2rem;
-    letter-spacing: 0.1rem;
-}
-
-.genre,
-.albumGenre {
-    font-size: 1.2rem;
-    letter-spacing: 0.1rem;
-}
-
-.songs {
-    white-space: pre-wrap;
-    line-height: 1.5em;
-    font-size: 1rem;
-    letter-spacing: 0.1rem;
-}
-
-.options {
-    justify-self: center;
-    width: 50%;
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
-    padding: 2rem 0;
-    border-top: #333 solid 0.02rem;
-    margin-top: 2rem;
-}
-
-.options button {
-    border: none;
-    background-color: transparent;
-    height: 3rem;
-    width: 100%;
-    font-size: 1.2rem;
-}
-
-.options a,
-.options form {
-    flex-grow: 1;
-    display: block;
-    height: 3rem;
-    width: 100%;
-    text-align: center;
-    align-content: center;
-    font-size: 1.2rem;
-}
-
-.options button:hover {
-    cursor: pointer;
-    background-color: #ffffffde;
-}
-
-.options a:hover {
-    background-color: #ffffffde;
+    color: #e48147;
 }
 
 .formMainContainer {
@@ -223,7 +161,7 @@ footer {
     align-items: center;
     align-self: center;
     margin: 2rem 0;
-    border: #333 solid 0.02rem;
+    border: #e48147 solid 0.02rem;
 }
 
 .formMainContainer form {
@@ -243,6 +181,7 @@ footer {
     font-size: 1.2rem;
     font-weight: 450;
     letter-spacing: 0.1rem;
+    color: #e48147;
 }
 
 .formMainContainer form input {
@@ -268,6 +207,7 @@ footer {
 .formMainContainer form button {
     border: none;
     height: 3rem;
+    color: #e48147;
     background-color: #ffffff9c;
     width: 100%;
     font-size: 1.2rem;

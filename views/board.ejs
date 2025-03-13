@@ -35,15 +35,45 @@
             <div class="postContainer">
                 <div class="title"><%= post.title %></div>
                 <div class="user"><%= post.username %></div>
+                <div class="time"><%= post.timestamp %></div>
                 <div class="content"><%= post.content %></div>
             </div>
             <% }); %> <% } else { %> <% board.forEach(post => { %>
             <div class="postContainer">
                 <div class="title"><%= post.title %></div>
-                <div class="user">Sign in to unveil</div>
+                <div class="user veiled">Sign in to unveil</div>
+                <div class="time"><%= post.timestamp %></div>
                 <div class="content"><%= post.content %></div>
             </div>
             <% }); %> <% } %>
+            <script>
+                const timeElements = document.querySelectorAll(".time");
+                timeElements.forEach((el) => {
+                    const timestamp = new Date(el.textContent.trim());
+
+                    // 格式化 12 小時制時間
+                    const hours = timestamp.getHours() % 12 || 12; // 12小時制
+                    const minutes = String(timestamp.getMinutes()).padStart(
+                        2,
+                        "0"
+                    );
+                    const ampm = timestamp.getHours() >= 12 ? "PM" : "AM";
+
+                    // 提取日期
+                    const day = timestamp.toLocaleString("en-US", {
+                        weekday: "short",
+                    });
+                    const month = timestamp.toLocaleString("en-US", {
+                        month: "short",
+                    });
+                    const year = timestamp.getFullYear();
+                    const dayOfMonth = timestamp.getDate();
+
+                    // 拼接結果
+                    const formattedTime = `${hours}:${minutes} ${ampm} ${day} ${month} ${dayOfMonth} ${year}`;
+                    el.textContent = formattedTime;
+                });
+            </script>
         </div>
         <footer>- Members Only... -</footer>
     </body>
