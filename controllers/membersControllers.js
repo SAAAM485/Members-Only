@@ -44,7 +44,10 @@ async function signUpGet(req, res) {
 async function signUpPost(req, res) {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-        return res.status(400).json({ errors: errors.array() });
+        return res.status(400).render("form", {
+            title: "Sign Up", // 替換為對應頁面的 title
+            errorMessages: errors.array().map((err) => err.msg), // 錯誤訊息陣列
+        });
     }
 
     const hashedPw = await bcrypt.hash(req.body.password, 12);

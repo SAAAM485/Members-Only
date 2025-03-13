@@ -30,10 +30,9 @@
                 <label for="username">Username</label>
                 <input type="text" name="username" id="username" required />
                 <label for="password">Password</label>
-                <input type="text" name="password" id="password" required />
-                <button type="submit">Sing In</button>
+                <input type="password" name="password" id="password" required />
+                <button type="submit">Sign In</button>
             </form>
-
             <% } else { %>
             <form action="/sign-up" method="post">
                 <label for="firstName">First Name</label>
@@ -43,18 +42,15 @@
                 <label for="username">Username</label>
                 <input type="text" name="username" id="username" required />
                 <label for="password">Password</label>
-                <input type="text" name="password" id="password" required />
+                <input type="password" name="password" id="password" required />
                 <label for="confirmPassword">Confirm Password</label>
                 <input
-                    type="text"
+                    type="password"
                     name="confirmPassword"
                     id="confirmPassword"
                     required
                 />
-                <label for="admin"
-                    >Admin Password (If you have the admin password, please fill
-                    in to gain excess.)</label
-                >
+                <label for="admin">Admin Password (Optional)</label>
                 <input type="text" name="admin" id="admin" />
                 <button type="submit">Sign Up</button>
             </form>

@@ -153,6 +153,11 @@ footer {
     color: #e48147;
 }
 
+.alert {
+    text-align: center;
+    list-style: none;
+}
+
 .formMainContainer {
     display: flex;
     width: 60%;
